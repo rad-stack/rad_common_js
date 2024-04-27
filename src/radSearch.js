@@ -55,7 +55,7 @@ export class RadSearch {
       };
       document.addEventListener('turbo:load', function() {
         $('.selectpicker-search').selectpicker({ liveSearch: true }).ajaxSelectPicker(options);
-      }
+      });
     });
   }
 }
