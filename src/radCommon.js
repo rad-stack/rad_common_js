@@ -25,17 +25,20 @@ import { Duplicates } from './duplicates';
 export class RadCommon {
   static setup() {
     $(document).ready(function () {
-      RadCommonAutoComplete.setup();
-      RadCommonGlobalSearch.setup();
-      RadCommonGeneral.setup();
-      RadCommonDynamicUpdater.setup();
-      AreYouSure.setup();
-      RadCommon.bootstrapSetup();
-      RadChosen.setup();
-      DateSetup.setup();
-      RadSearch.setup();
-      Duplicates.setup();
-      BatchActions.setup();
+      document.addEventListener('turbo:load', function() {
+        RadCommonAutoComplete.setup();
+        RadCommonGlobalSearch.setup();
+        RadCommonGeneral.setup();
+        RadCommonDynamicUpdater.setup();
+        AreYouSure.setup();
+        RadCommon.bootstrapSetup();
+        RadChosen.setup();
+        DateSetup.setup();
+        RadSearch.setup();
+        Duplicates.setup();
+        BatchActions.setup();
+        $('.selectpicker').selectpicker();
+      });
     });
   }
 
