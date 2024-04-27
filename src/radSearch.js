@@ -52,8 +52,10 @@ export class RadSearch {
           searchPlaceholder: 'Start typing to search',
           emptyTitle: 'Nothing selected'
         }
-      };  
-      $('.selectpicker-search').selectpicker({ liveSearch: true }).ajaxSelectPicker(options);
+      };
+      document.addEventListener('turbo:load', function() {
+        $('.selectpicker-search').selectpicker({ liveSearch: true }).ajaxSelectPicker(options);
+      }
     });
   }
 }
