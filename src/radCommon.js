@@ -21,6 +21,7 @@ import { DateSetup } from './dateSetup';
 import { RadSearch } from './radSearch';
 import { BatchActions } from './batchActions';
 import { Duplicates } from './duplicates';
+import { RadSearchDateFilter } from './radSearchDateFilter';
 
 export class RadCommon {
   static setup() {
@@ -36,6 +37,7 @@ export class RadCommon {
       RadSearch.setup();
       Duplicates.setup();
       BatchActions.setup();
+      RadSearchDateFilter.setup();
     });
   }
 
