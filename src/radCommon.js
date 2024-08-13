@@ -39,6 +39,10 @@ export class RadCommon {
         BatchActions.setup();
         $('.selectpicker').selectpicker();
       });
+
+      document.addEventListener('turbo:render', function(event) {
+        $('.selectpicker').selectpicker('refresh');
+      });
     });
   }
 
