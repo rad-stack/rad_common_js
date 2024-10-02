@@ -24,39 +24,45 @@ export class BatchActions {
       enableDropdown();
     }
 
-    document.getElementById('batch_action_select_all').addEventListener('click', function() {
-      const isChecked = this.checked;
-      if (isChecked) {
-        enableDropdown();
-      } else {
-        disableDropdown();
-      }
-
-      document.querySelectorAll('.bulk-action-checkbox').forEach(function(checkbox) {
-        checkbox.checked = isChecked;
-      });
-    });
-
-    document.querySelectorAll('.bulk-action-checkbox').forEach(function(checkbox) {
-      checkbox.addEventListener('click', function() {
-        const allDeselected = Array.from(document.querySelectorAll('.bulk-action-checkbox')).every(function(cb) {
-          return !cb.checked;
-        });
-
-        if (this.checked) {
+    const selectAllElement = document.getElementById('batch_action_select_all');
+    if (selectAllElement.length) {
+      selectAllElement.addEventListener('click', function() {
+        const isChecked = this.checked;
+        if (isChecked) {
           enableDropdown();
-          if (Array.from(document.querySelectorAll('.bulk-action-checkbox')).every(function(cb) {
-            return cb.checked;
-          })) {
-            document.getElementById('batch_action_select_all').checked = true;
-          }
         } else {
-          document.getElementById('batch_action_select_all').checked = false;
-          if (allDeselected) {
-            disableDropdown();
-          }
+          disableDropdown();
         }
+
+        document.querySelectorAll('.bulk-action-checkbox').forEach(function(checkbox) {
+          checkbox.checked = isChecked;
+        });
       });
-    });
+    }
+  
+    const bulkActionElements = document.querySelectorAll('.bulk-action-checkbox');
+    if (bulkActionElements.length) {
+      document.querySelectorAll('.bulk-action-checkbox').forEach(function(checkbox) {
+        checkbox.addEventListener('click', function() {
+          const allDeselected = Array.from(document.querySelectorAll('.bulk-action-checkbox')).every(function(cb) {
+            return !cb.checked;
+          });
+
+          if (this.checked) {
+            enableDropdown();
+            if (Array.from(document.querySelectorAll('.bulk-action-checkbox')).every(function(cb) {
+              return cb.checked;
+            })) {
+              document.getElementById('batch_action_select_all').checked = true;
+            }
+          } else {
+            document.getElementById('batch_action_select_all').checked = false;
+            if (allDeselected) {
+              disableDropdown();
+            }
+          }
+        });
+      });
+    }
   }
 }
