@@ -25,7 +25,7 @@ export class BatchActions {
     }
 
     const selectAllElement = document.getElementById('batch_action_select_all');
-    if (selectAllElement.length) {
+    if (selectAllElement) {
       selectAllElement.addEventListener('click', function() {
         const isChecked = this.checked;
         if (isChecked) {
@@ -41,7 +41,7 @@ export class BatchActions {
     }
   
     const bulkActionElements = document.querySelectorAll('.bulk-action-checkbox');
-    if (bulkActionElements.length) {
+    if (bulkActionElements) {
       document.querySelectorAll('.bulk-action-checkbox').forEach(function(checkbox) {
         checkbox.addEventListener('click', function() {
           const allDeselected = Array.from(document.querySelectorAll('.bulk-action-checkbox')).every(function(cb) {
