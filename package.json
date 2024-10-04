@@ -10,7 +10,6 @@
     "@rails/actiontext": "^6.0.2-1",
     "@rails/ujs": "^6.0.5",
     "@rails/webpacker": "5.4.3",
-    "ajax-bootstrap-select": "^1.4.5",
     "bootstrap": "^4.0.0",
     "chosen-js": "^1.8.7",
     "jquery": "^3.3.1",

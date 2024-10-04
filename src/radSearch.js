@@ -53,7 +53,6 @@ export class RadSearch {
           emptyTitle: 'Nothing selected'
         }
       };  
-      $('.selectpicker-search').selectpicker({ liveSearch: true }).ajaxSelectPicker(options);
     });
   }
 }
