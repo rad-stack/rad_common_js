@@ -4,11 +4,8 @@ require('jquery');
 require('@rails/ujs').start();
 require('popper.js');
 require('bootstrap');
-require('bootstrap-select');
 require('readmore-js');
 require('jquery.are-you-sure');
-require('bootstrap-select');
-require('ajax-bootstrap-select');
 require('./richtext');
 
 import { RadCommonGlobalSearch } from './radCommonGlobalSearch';
