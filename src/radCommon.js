@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 require('jquery');
 require('@rails/ujs').start();
-require('popper.js');
+require('@popperjs/core');
 require('bootstrap');
 require('bootstrap-select');
 require('readmore-js');
@@ -42,7 +42,14 @@ export class RadCommon {
   }
 
   static bootstrapSetup() {
-    $('[data-toggle="tooltip"]').tooltip();
-    $('[data-toggle="popover"]').popover();
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
   }
 }
