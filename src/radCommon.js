@@ -38,6 +38,7 @@ export class RadCommon {
       Duplicates.setup();
       BatchActions.setup();
       RadSearchDateFilter.setup();
+      $('.selectpicker').selectpicker();
     });
   }
 
