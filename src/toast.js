@@ -17,4 +17,19 @@ export class Toast {
     $('#toast-nav .toast').attr('aria-alert', alertType);
     $('#toast-nav .toast').toast('show');
   }
+
+  static setup() {
+    var toastMessageElement = document.getElementById('toast-nav');
+    var successMessage = toastMessageElement && toastMessageElement.dataset.successMessage;
+    
+    if (successMessage) {
+      Toast.success('Success!', successMessage);
+    }
+
+    var errorMessage = toastMessageElement && toastMessageElement.dataset.errorMessage;
+
+    if (errorMessage) {
+      Toast.error('Error!', errorMessage, 10000);
+    }
+  }
 }

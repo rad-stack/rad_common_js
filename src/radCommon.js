@@ -22,6 +22,7 @@ import { RadSearch } from './radSearch';
 import { BatchActions } from './batchActions';
 import { Duplicates } from './duplicates';
 import { RadSearchDateFilter } from './radSearchDateFilter';
+import { Toast } from './toast';
 
 export class RadCommon {
   static setup() {
@@ -38,6 +39,7 @@ export class RadCommon {
       Duplicates.setup();
       BatchActions.setup();
       RadSearchDateFilter.setup();
+      Toast.setup();
     });
   }
 
