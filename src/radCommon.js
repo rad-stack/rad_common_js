@@ -10,6 +10,7 @@ require('jquery.are-you-sure');
 require('bootstrap-select');
 require('ajax-bootstrap-select');
 require('./richtext');
+require('./channels');
 
 import { RadCommonGlobalSearch } from './radCommonGlobalSearch';
 import { RadCommonAutoComplete } from './radCommonAutoComplete';
