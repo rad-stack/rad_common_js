@@ -37,7 +37,7 @@
 #toast-container .toast {
   position: absolute;
   right: 0;
-  width: 350px;
+  width: 375px;
   margin: 0;
   transition: background-color 0.5s, transform 0.5s;
   pointer-events: auto;
@@ -58,8 +58,6 @@
 }
 
 #toast-container .toast-body {
-  max-height: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  max-height: 200px;
+  overflow-y: auto;
 }
