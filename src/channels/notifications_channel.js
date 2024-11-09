@@ -7,13 +7,14 @@ consumer.subscriptions.create('NotificationsChannel', {
   disconnected() {},
 
   received(data) {
-    let message = `${data.notification.content}${data.notification.record ? `: ${data.notification.record}` : ''}`;
+    let title = data.notification.content;
+    const message = `${title}${data.notification.record ? `: ${data.notification.record}` : ''}`;
 
     if (data.notification.url) {
-      message = `<a class="text-dark" href="${data.notification.url}">${message}</a>`;
+      title = `<a class="text-dark" href="${data.notification.url}">${title}</a>`;
     }
 
-    Toast.success(data.notification.content, message);
+    Toast.success(title, message);
     
     const unreadCount = document.querySelectorAll('.unread-notification-count');
     if (unreadCount.length) {
