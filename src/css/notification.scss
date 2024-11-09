@@ -39,18 +39,9 @@
   right: 0;
   width: 350px;
   margin: 0;
-  transition: transform 0.5s, opacity 0.5s;
+  transition: background-color 0.5s, transform 0.5s;
   pointer-events: auto;
-  opacity: 1;
-}
-
-#toast-container .toast {
-  opacity: 0.95;
-  transition: opacity 0.5s;
-}
-
-#toast-container.hovering-toast-container .toast:last-child {
-  background-color: whitesmoke !important;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 #toast-container .toast {
@@ -58,6 +49,10 @@
 }
 
 #toast-container .toast:not(:last-child) {
-  transform: translateY(-30px);
-  opacity: 0.85;
+  transform: translateY(-25px);
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+#toast-container.hovering-toast-container .toast:last-child {
+  background-color: rgba(255, 255, 255, 1);
 }
