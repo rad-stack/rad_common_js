@@ -13,7 +13,7 @@ consumer.subscriptions.create('NotificationsChannel', {
       message = `<a class="text-dark" href="${data.notification.url}">${message}</a>`;
     }
 
-    Toast.success(data.notification.content, message, 30000);
+    Toast.success(data.notification.content, message);
     
     const unreadCount = document.querySelectorAll('.unread-notification-count');
     if (unreadCount.length) {

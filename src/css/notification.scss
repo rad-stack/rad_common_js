@@ -45,7 +45,7 @@
 }
 
 #toast-container .toast {
-  opacity: 0.85;
+  opacity: 0.95;
   transition: opacity 0.5s;
 }
 
@@ -59,4 +59,5 @@
 
 #toast-container .toast:not(:last-child) {
   transform: translateY(-30px);
+  opacity: 0.85;
 }
