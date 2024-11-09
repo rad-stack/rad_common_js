@@ -1,5 +1,6 @@
 export class Toast {
   static toastCount = 0;
+  static activeToasts = [];
 
   static success(title, message, time = 5000) {
     Toast.display(title, message, time, 'toast-success', 'polite', 'status');
@@ -61,30 +62,47 @@ export class Toast {
     function startHideTimer() {
       hideTimeout = setTimeout(hideToast, remainingTime);
       startTime = Date.now();
+      toastElement.hideTimeout = hideTimeout;
+      toastElement.startTime = startTime;
     }
 
     function pauseHideTimer() {
       clearTimeout(hideTimeout);
       remainingTime -= Date.now() - startTime;
+      toastElement.remainingTime = remainingTime;
     }
 
     startHideTimer();
 
-    toastElement.addEventListener('mouseenter', () => {
-      pauseHideTimer();
-      toastContainer.classList.add('hovering-toast');
-    });
+    toastElement.startHideTimer = startHideTimer;
+    toastElement.pauseHideTimer = pauseHideTimer;
+    toastElement.remainingTime = remainingTime;
 
-    toastElement.addEventListener('mouseleave', () => {
-      startHideTimer();
-      toastContainer.classList.remove('hovering-toast');
-    });
+    Toast.activeToasts.push(toastElement);
 
     $(toastElement).on('hidden.bs.toast', function () {
+      const index = Toast.activeToasts.indexOf(toastElement);
+      if (index > -1) {
+        Toast.activeToasts.splice(index, 1);
+      }
       toastElement.remove();
       Toast.toastCount -= 1;
       Toast.updateToastPositions();
     });
+
+    if (!toastContainer.hasEventListeners) {
+      toastContainer.hasEventListeners = true;
+
+      toastContainer.addEventListener('mouseenter', () => {
+        Toast.pauseAllHideTimers();
+        toastContainer.classList.add('hovering-toast-container');
+      });
+
+      toastContainer.addEventListener('mouseleave', () => {
+        Toast.resumeAllHideTimers();
+        toastContainer.classList.remove('hovering-toast-container');
+      });
+    }
   }
 
   static updateToastPositions() {
@@ -95,8 +113,27 @@ export class Toast {
     });
   }
 
+  static pauseAllHideTimers() {
+    Toast.activeToasts.forEach((toastElement) => {
+      if (toastElement.pauseHideTimer) {
+        toastElement.pauseHideTimer();
+      }
+    });
+  }
+
+  static resumeAllHideTimers() {
+    Toast.activeToasts.forEach((toastElement) => {
+      if (toastElement.startHideTimer) {
+        toastElement.startHideTimer();
+      }
+    });
+  }
+
   static setup() {
     const toastContainer = document.getElementById('toast-container');
+    Toast.activeToasts = [];
+
+
     const successMessage = toastContainer && toastContainer.dataset.successMessage;
 
     if (successMessage) {

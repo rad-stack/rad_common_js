@@ -44,11 +44,12 @@
   opacity: 1;
 }
 
-#toast-container .toast:not(:last-child) {
+#toast-container .toast {
   opacity: 0.85;
+  transition: opacity 0.5s;
 }
 
-#toast-container.hovering-toast .toast {
+#toast-container.hovering-toast-container .toast:last-child {
   opacity: 1;
 }
 
@@ -57,5 +58,5 @@
 }
 
 #toast-container .toast:not(:last-child) {
-  transform: translateY(-10px);
+  transform: translateY(-30px);
 }
