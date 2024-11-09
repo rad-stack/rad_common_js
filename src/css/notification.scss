@@ -56,3 +56,10 @@
 #toast-container.hovering-toast-container .toast:last-child {
   background-color: rgba(255, 255, 255, 1);
 }
+
+#toast-container .toast-body {
+  max-height: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
