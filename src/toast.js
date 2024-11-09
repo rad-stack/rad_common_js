@@ -1,5 +1,5 @@
 export class Toast {
-  static toastCount = 0; // Keep track of the number of toasts
+  static toastCount = 0;
 
   static success(title, message, time = 5000) {
     Toast.display(title, message, time, 'toast-success', 'polite', 'status');
@@ -9,74 +9,77 @@ export class Toast {
     Toast.display(title, message, time, 'toast-error', 'assertive', 'alert');
   }
 
-  static display(title, message, time = 5000, toastClass, politeness = 'polite', alertType = 'alert') {
-    // Increment the toast count
+  static display(
+    title,
+    message,
+    time = 5000,
+    toastClass,
+    politeness = 'polite',
+    alertType = 'alert'
+  ) {
     Toast.toastCount += 1;
 
-    // Get the toast container
     const toastContainer = document.getElementById('toast-container');
 
-    // Create a new toast element
     const toastElement = document.createElement('div');
     toastElement.classList.add('toast', 'shadow', 'hide');
     toastElement.setAttribute('aria-atomic', 'true');
     toastElement.setAttribute('aria-live', politeness);
     toastElement.setAttribute('role', alertType);
-    toastElement.setAttribute('data-delay', time);
+    toastElement.setAttribute('data-autohide', 'false');
 
-    // Set z-index based on the toast count
-    toastElement.style.zIndex = 1080 + Toast.toastCount; // Ensure it's above other elements
-
-    // Position the toast
-    toastElement.style.bottom = `${(Toast.toastCount - 1) * 10}px`; // Adjust overlap
+    toastElement.style.zIndex = 1080 + Toast.toastCount;
+    toastElement.style.bottom = `${(Toast.toastCount - 1) * 10}px`;
     toastElement.style.right = '0';
 
-    // Create the toast header
-    const toastHeader = document.createElement('div');
-    toastHeader.classList.add('toast-header', 'px-3', toastClass);
+    toastElement.innerHTML = `
+      <div class="toast-header px-3 ${toastClass}">
+        <h5 class="mr-auto pt-2" style="margin: 0;">${title}</h5>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body" style="margin: 0;">
+        <div class="lead p-2" style="margin: 0;">${message}</div>
+      </div>
+    `;
 
-    const toastTitle = document.createElement('h5');
-    toastTitle.classList.add('mr-auto', 'pt-2');
-    toastTitle.style.margin = '0';
-    toastTitle.innerHTML = title;
-
-    const closeButton = document.createElement('button');
-    closeButton.classList.add('ml-2', 'mb-1', 'close');
-    closeButton.setAttribute('aria-label', 'Close');
-    closeButton.setAttribute('data-dismiss', 'toast');
-    closeButton.setAttribute('type', 'button');
-
-    const closeSpan = document.createElement('span');
-    closeSpan.setAttribute('aria-hidden', 'true');
-    closeSpan.innerHTML = '&times;';
-
-    closeButton.appendChild(closeSpan);
-    toastHeader.appendChild(toastTitle);
-    toastHeader.appendChild(closeButton);
-
-    // Create the toast body
-    const toastBody = document.createElement('div');
-    toastBody.classList.add('toast-body');
-    toastBody.style.margin = '0';
-
-    const toastMessage = document.createElement('div');
-    toastMessage.classList.add('lead', 'p-2');
-    toastMessage.style.margin = '0';
-    toastMessage.innerHTML = message;
-
-    toastBody.appendChild(toastMessage);
-
-    // Assemble the toast
-    toastElement.appendChild(toastHeader);
-    toastElement.appendChild(toastBody);
-
-    // Append the toast to the container
     toastContainer.appendChild(toastElement);
 
-    // Initialize and show the toast
-    $(toastElement).toast('show');
+    const bootstrapToast = $(toastElement).toast({ autohide: false });
 
-    // Remove the toast from the DOM after it hides
+    bootstrapToast.toast('show');
+
+    let hideTimeout;
+    let startTime = Date.now();
+    let remainingTime = time;
+
+    function hideToast() {
+      bootstrapToast.toast('hide');
+    }
+
+    function startHideTimer() {
+      hideTimeout = setTimeout(hideToast, remainingTime);
+      startTime = Date.now();
+    }
+
+    function pauseHideTimer() {
+      clearTimeout(hideTimeout);
+      remainingTime -= Date.now() - startTime;
+    }
+
+    startHideTimer();
+
+    toastElement.addEventListener('mouseenter', () => {
+      pauseHideTimer();
+      toastContainer.classList.add('hovering-toast');
+    });
+
+    toastElement.addEventListener('mouseleave', () => {
+      startHideTimer();
+      toastContainer.classList.remove('hovering-toast');
+    });
+
     $(toastElement).on('hidden.bs.toast', function () {
       toastElement.remove();
       Toast.toastCount -= 1;
@@ -84,7 +87,6 @@ export class Toast {
     });
   }
 
-  // Update positions of existing toasts when one is removed
   static updateToastPositions() {
     const toasts = document.querySelectorAll('#toast-container .toast');
     toasts.forEach((toast, index) => {

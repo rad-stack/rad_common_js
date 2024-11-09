@@ -14,30 +14,48 @@
   animation: pulse 1s;
 }
 
+.toast-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.toast-error {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
 #toast-container {
   position: fixed;
   bottom: 1rem;
   right: 1rem;
   z-index: 1050;
-  pointer-events: none; /* Allows clicks to pass through empty areas */
+  pointer-events: none;
 }
 
-/* Toast Styles */
 #toast-container .toast {
   position: absolute;
   right: 0;
   width: 350px;
   margin: 0;
   transition: transform 0.5s, opacity 0.5s;
-  pointer-events: auto; /* Re-enable pointer events for the toasts */
+  pointer-events: auto;
+  opacity: 1;
 }
 
-/* Adjust the overlapping offset */
 #toast-container .toast:not(:last-child) {
-  opacity: 0.85; /* Slightly transparent for older toasts */
+  opacity: 0.85;
 }
 
-/* Optional: Add a slight upward shift for older toasts */
+#toast-container.hovering-toast .toast {
+  opacity: 1;
+}
+
+#toast-container .toast {
+  transform: translateY(0);
+}
+
 #toast-container .toast:not(:last-child) {
-  transform: translateY(-30px); /* Adjust as needed */
+  transform: translateY(-10px);
 }
