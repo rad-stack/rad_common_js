@@ -7,9 +7,15 @@ consumer.subscriptions.create('NotificationsChannel', {
   disconnected() {},
 
   received(data) {
+    let message = `${data.notification.content}${data.notification.record ? `: ${data.notification.record}` : ''}`;
+
+    if (data.notification.url) {
+      message = `<a class="text-dark" href="${data.notification.url}">${message}</a>`;
+    }
+
     Toast.success(
       data.notification.content,
-      `${data.notification.content}${data.notification.record ? `: ${data.notification.record}` : ''}`
+      message
     );
     
     const unreadCount = document.querySelectorAll('.unread-notification-count');
