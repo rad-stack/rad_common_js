@@ -21,13 +21,12 @@ import { DateSetup } from './dateSetup';
 import { RadSearch } from './radSearch';
 import { BatchActions } from './batchActions';
 import { Duplicates } from './duplicates';
-import { RadSearchDateFilter } from './radSearchDateFilter';
 import { Toast } from './toast';
 import { SentryTest } from './sentry';
 
 export class RadCommon {
   static setup() {
-    $(document).ready(function () {
+    const setupSteps = () => {
       RadCommonAutoComplete.setup();
       RadCommonGlobalSearch.setup();
       RadCommonGeneral.setup();
@@ -39,9 +38,20 @@ export class RadCommon {
       RadSearch.setup();
       Duplicates.setup();
       BatchActions.setup();
-      RadSearchDateFilter.setup();
       Toast.setup();
       SentryTest.setup();
+      $('.selectpicker').selectpicker();
+    };
+    document.addEventListener('turbo:render', function(event) {
+      setupSteps();
+    });
+
+    document.addEventListener('turbo:load', function(event) {
+      setupSteps();
+    });
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      setupSteps();
     });
   }
 

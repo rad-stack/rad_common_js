@@ -53,7 +53,9 @@ export class RadSearch {
           emptyTitle: 'Nothing selected'
         }
       };
-      $('.selectpicker-search').selectpicker({ liveSearch: true }).ajaxSelectPicker(options);
+      document.addEventListener('turbo:render', function() {
+        $('.selectpicker-search').selectpicker({ liveSearch: true }).ajaxSelectPicker(options);
+      });
     });
   }
 }
