@@ -1,6 +1,6 @@
-@import './global_search';
-@import './rad_common/rad_common.css.scss';
-@import './read_more.css.scss';
-@import './deviseTwilioVerify.scss';
-@import './rad_common/jquery-ui-overrides.scss';
-@import './report_pdf';
+@use './global_search' as *;
+@use './rad_common/rad_common.css.scss' as *;
+@use './read_more.css.scss' as *;
+@use './deviseTwilioVerify.scss' as *;
+@use './rad_common/jquery-ui-overrides.scss' as *;
+@use './report_pdf' as *;
