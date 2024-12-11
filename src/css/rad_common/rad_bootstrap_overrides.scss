@@ -1,3 +1,7 @@
+@use "~bootstrap/scss/functions" as *;
+@use "~bootstrap/scss/variables" as *;
+@use "~bootstrap/scss/mixins" as *;
+
 html {
   // Bootstrap 4 increased the default font size,
   // so this just brings it back down so everything is closer to what it was.
