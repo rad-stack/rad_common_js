@@ -18,7 +18,6 @@
     "jquery": "^3.3.1",
     "jquery-ui": "^1.13.2",
     "jquery-ujs": "^1.2.3",
-    "jquery.are-you-sure": "^1.9.0",
     "moment": "^2.29.4",
     "popper.js": "^1.16.1",
     "postcss": "^8.2.10",

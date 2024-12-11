@@ -1,6 +1,4 @@
 import $ from 'jquery';
-require('jquery-ui');
-require('jquery-ui/ui/widgets/autocomplete');
 
 export class RadCommonGlobalSearch {
   static setup() {

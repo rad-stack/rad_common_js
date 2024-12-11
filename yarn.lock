@@ -3956,14 +3956,7 @@ jquery-ujs@^1.2.3:
   resolved "https://registry.yarnpkg.com/jquery-ujs/-/jquery-ujs-1.2.3.tgz#dcac6026ab7268e5ee41faf9d31c997cd4ddd603"
   integrity sha512-59wvfx5vcCTHMeQT1/OwFiAj+UffLIwjRIoXdpO7Z7BCFGepzq9T9oLVeoItjTqjoXfUrHJvV7QU6pUR+UzOoA==
 
-jquery.are-you-sure@^1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/jquery.are-you-sure/-/jquery.are-you-sure-1.9.0.tgz#16aaa2c6080fa214f64027239ae3a34ad6a6265e"
-  integrity sha512-2r0uFx8CyAopjeHGOdvvwpFP921TnW1+v1uJXcAWQYHYGB1tryTDhQY+5u6HsVeMwbWiRTKVZFWnLaFpDvIqZQ==
-  dependencies:
-    jquery ">=1.4.2"
-
-jquery@>2.1.4, "jquery@>=1.12.0 <5.0.0", jquery@>=1.4.2, jquery@^3.3.1:
+jquery@>2.1.4, "jquery@>=1.12.0 <5.0.0", jquery@^3.3.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
   integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
