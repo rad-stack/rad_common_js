@@ -1,9 +1,7 @@
-import {RadCommonGlobalSearch} from "./src/radCommonGlobalSearch";
-import {RadCommonAutoComplete} from "./src/radCommonAutoComplete";
-
-import $ from 'jquery'
+import { RadCommonGlobalSearch } from './src/radCommonGlobalSearch';
+import { RadCommonAutoComplete } from './src/radCommonAutoComplete';
 
 $(document).ready( function() {
-    RadCommonAutoComplete.setup();
-    RadCommonGlobalSearch.setup();
-})
+  RadCommonAutoComplete.setup();
+  RadCommonGlobalSearch.setup();
+});

@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 export class RadCommonDynamicUpdater {
   static setup() {
     $(document).ready( function() {

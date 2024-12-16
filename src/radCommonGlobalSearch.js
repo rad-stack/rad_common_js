@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 export class RadCommonGlobalSearch {
   static setup() {
     $('.search-option').click(function() {

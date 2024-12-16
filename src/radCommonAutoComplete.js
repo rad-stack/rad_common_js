@@ -1,12 +1,10 @@
-import jQuery from 'jquery';
-
 export class RadCommonAutoComplete {
   constructor( e ) {
     this.e = e;
-    this.e.delimiter = jQuery(e).attr('data-delimiter') || null;
-    this.e.min_length = jQuery(e).attr('min-length') || 2;
-    this.e.append_to = jQuery(e).attr('data-append-to') || null;
-    this.e.autoFocus = jQuery(e).attr('data-auto-focus') || false;
+    this.e.delimiter = $(e).attr('data-delimiter') || null;
+    this.e.min_length = $(e).attr('min-length') || 2;
+    this.e.append_to = $(e).attr('data-append-to') || null;
+    this.e.autoFocus = $(e).attr('data-auto-focus') || false;
 
     this.autoCompleteSetup();
   }
@@ -15,7 +13,7 @@ export class RadCommonAutoComplete {
     let autoCompleteEvent = this.e;
     let that = this;
 
-    jQuery(autoCompleteEvent).autocomplete({
+    $(autoCompleteEvent).autocomplete({
       appendTo: autoCompleteEvent.append_to,
       autoFocus: autoCompleteEvent.autoFocus,
       create: function() {
@@ -46,16 +44,16 @@ export class RadCommonAutoComplete {
       },
       source: function( request, response ) {
         let params = { term: that.extractLast( request.term ) };
-        if (jQuery(autoCompleteEvent).attr('data-autocomplete-fields')) {
-          jQuery.each(jQuery.parseJSON(jQuery(autoCompleteEvent).attr('data-autocomplete-fields')), function(field, selector) {
-            params[field] = jQuery(selector).val();
+        if ($(autoCompleteEvent).attr('data-autocomplete-fields')) {
+          $.each($.parseJSON($(autoCompleteEvent).attr('data-autocomplete-fields')), function(field, selector) {
+            params[field] = $(selector).val();
           });
         }
-        if(jQuery(autoCompleteEvent).data('excluded-ids')) {
-          params['excluded_ids'] = jQuery(autoCompleteEvent).data('excluded-ids');
+        if($(autoCompleteEvent).data('excluded-ids')) {
+          params['excluded_ids'] = $(autoCompleteEvent).data('excluded-ids');
         }
-        const allowNewModel = jQuery(autoCompleteEvent).data('allow-new-model');
-        jQuery.getJSON( jQuery(autoCompleteEvent).attr('data-autocomplete'), params, function() {
+        const allowNewModel = $(autoCompleteEvent).data('allow-new-model');
+        $.getJSON( $(autoCompleteEvent).attr('data-autocomplete'), params, function() {
           if (allowNewModel) {
             arguments[0].unshift({ id: '', label: `Create "${request.term}" ${allowNewModel}` });
           }
@@ -66,14 +64,14 @@ export class RadCommonAutoComplete {
             }
           }
           let newOptionExists = false;
-          jQuery(arguments[0]).each(function(i, el) {
+          $(arguments[0]).each(function(i, el) {
             let obj = {};
             obj[el.id] = el;
             // Check if record already exists in suggestions
             if (el.label === request.term) {
               newOptionExists = true;
             }
-            jQuery(autoCompleteEvent).data(obj);
+            $(autoCompleteEvent).data(obj);
           });
           if (allowNewModel && newOptionExists) {
             arguments[0].shift(); // Remove create option if record exists in suggestions
@@ -82,21 +80,21 @@ export class RadCommonAutoComplete {
         });
       },
       change: function( event, ui ) {
-        if(!jQuery(this).is('[data-id-element]') ||
-                    jQuery(jQuery(this).attr('data-id-element')).val() == '') {
+        if(!$(this).is('[data-id-element]') ||
+                    $($(this).attr('data-id-element')).val() == '') {
           return;
         }
 
-        jQuery(jQuery(this).attr('data-id-element')).val(ui.item ? ui.item.id : '').trigger('change');
+        $($(this).attr('data-id-element')).val(ui.item ? ui.item.id : '').trigger('change');
 
-        if (jQuery(this).attr('data-update-elements')) {
-          let update_elements = jQuery.parseJSON(jQuery(this).attr('data-update-elements'));
-          let data = ui.item ? jQuery(this).data(ui.item.id.toString()) : {};
-          if(update_elements && jQuery(update_elements['id']).val() == '') {
+        if ($(this).attr('data-update-elements')) {
+          let update_elements = $.parseJSON($(this).attr('data-update-elements'));
+          let data = ui.item ? $(this).data(ui.item.id.toString()) : {};
+          if(update_elements && $(update_elements['id']).val() == '') {
             return;
           }
           for (let key in update_elements) {
-            let element = jQuery(update_elements[key]);
+            let element = $(update_elements[key]);
             if (element.is(':checkbox')) {
               if (data[key] != null) {
                 element.prop('checked', data[key]);
@@ -134,16 +132,16 @@ export class RadCommonAutoComplete {
           if (ui.item.id !== '' || !this.dataset.allowNewModel) {
             this.value = terms.join('').replace(/<(?:.|\n)*?>/gm, '');
           }
-          if (jQuery(this).attr('data-id-element')) {
-            jQuery(jQuery(this).attr('data-id-element')).val(ui.item.id);
+          if ($(this).attr('data-id-element')) {
+            $($(this).attr('data-id-element')).val(ui.item.id);
             let idElement = $(this).attr('data-id-element');
             $(idElement).trigger('change');
           }
-          if (jQuery(this).attr('data-update-elements')) {
-            let data = jQuery(this).data(ui.item.id.toString());
-            let update_elements = jQuery.parseJSON(jQuery(this).attr('data-update-elements'));
+          if ($(this).attr('data-update-elements')) {
+            let data = $(this).data(ui.item.id.toString());
+            let update_elements = $.parseJSON($(this).attr('data-update-elements'));
             for (let key in update_elements) {
-              let element = jQuery(update_elements[key]);
+              let element = $(update_elements[key]);
               if (element.is(':checkbox')) {
                 if (data[key] != null) {
                   element.prop('checked', data[key]);
@@ -155,13 +153,13 @@ export class RadCommonAutoComplete {
           }
         }
         let remember_string = this.value;
-        jQuery(this).bind('keyup.clearId', function(){
-          if(jQuery.trim(jQuery(this).val()) != jQuery.trim(remember_string)){
-            jQuery(jQuery(this).attr('data-id-element')).val('');
-            jQuery(this).unbind('keyup.clearId');
+        $(this).bind('keyup.clearId', function(){
+          if($.trim($(this).val()) != $.trim(remember_string)){
+            $($(this).attr('data-id-element')).val('');
+            $(this).unbind('keyup.clearId');
           }
         });
-        jQuery(autoCompleteEvent).trigger('railsAutocomplete.select', ui);
+        $(autoCompleteEvent).trigger('railsAutocomplete.select', ui);
         return false;
       }
     });
@@ -177,14 +175,14 @@ export class RadCommonAutoComplete {
 
   static setup() {
     RadCommonAutoComplete.display_autocomplete_errors();
-    jQuery('input[data-autocomplete]').focus( function() {
+    $('input[data-autocomplete]').focus( function() {
       new RadCommonAutoComplete(this);
     });
   }
 
   static display_autocomplete_errors()
   {
-    jQuery('.ui-autocomplete-input').each( function()
+    $('.ui-autocomplete-input').each( function()
     {
       RadCommonAutoComplete.display_autocomplete_error(this, 'id-element');
       RadCommonAutoComplete.display_autocomplete_error(this, 'association-element');
@@ -193,18 +191,18 @@ export class RadCommonAutoComplete {
 
   static display_autocomplete_error(e, data_attribute)
   {
-    let formGroup = jQuery(e).parent('.form-group');
+    let formGroup = $(e).parent('.form-group');
 
-    if( jQuery(e).data(data_attribute) )
+    if( $(e).data(data_attribute) )
     {
-      let idElement = jQuery( jQuery(e).data(data_attribute) );
+      let idElement = $( $(e).data(data_attribute) );
       let idFormGroup = idElement.parent('.form-group');
 
       idFormGroup.find('div.invalid-feedback').each( function()
       {
         formGroup.addClass('form-group-invalid');
         formGroup.append( $(this).clone() );
-        jQuery(e).addClass('is-invalid');
+        $(e).addClass('is-invalid');
       } );
     }
   }

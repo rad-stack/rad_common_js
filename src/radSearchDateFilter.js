@@ -1,5 +1,4 @@
 import moment from 'moment';
-import $ from 'jquery';
 
 export class RadSearchDateFilter {
   static setup() {

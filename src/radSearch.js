@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 export class RadSearch {
   static setup() {
     $(document).ready(function() {
