@@ -18,7 +18,6 @@ class RichText {
 
   insertHeadingElements() {
     this.removeOriginalHeadingButton();
-    this.removeAttachmentButton();
     this.insertNewHeadingButton();
     this.insertHeadingDialog();
   }
