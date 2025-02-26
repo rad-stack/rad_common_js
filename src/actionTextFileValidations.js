@@ -1,4 +1,5 @@
 export class ActionTextFileValidations {
+    // Make sure to update VALID_ATTACHMENT_TYPES in rad_common if you add or remove any file types
     static VALID_ATTACHMENT_TYPES = [
         "application/msword",
         "application/pdf",
