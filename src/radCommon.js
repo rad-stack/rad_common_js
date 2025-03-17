@@ -6,7 +6,6 @@ require('./richtext');
 
 const bootstrap = require('bootstrap');
 
-import { RadCommonDynamicUpdater } from './radCommonDynamicUpdater';
 import { RadCommonGeneral } from './radCommonGeneral';
 import { AreYouSure } from './areYouSure';
 import { DateSetup } from './dateSetup';
@@ -22,7 +21,6 @@ export class RadCommon {
   static setup() {
     $(document).ready(function () {
       RadCommonGeneral.setup();
-      RadCommonDynamicUpdater.setup();
       AreYouSure.setup();
       RadCommon.bootstrapSetup();
       DateSetup.setup();
