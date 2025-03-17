@@ -5,7 +5,6 @@ require('bootstrap');
 require('readmore-js');
 require('./richtext');
 
-import { RadCommonDynamicUpdater } from './radCommonDynamicUpdater';
 import { RadCommonGeneral } from './radCommonGeneral';
 import { AreYouSure } from './areYouSure';
 import { DateSetup } from './dateSetup';
