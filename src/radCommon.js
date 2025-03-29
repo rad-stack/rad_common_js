@@ -20,7 +20,6 @@ export class RadCommon {
   static setup() {
     $(document).ready(function () {
       RadCommonGeneral.setup();
-      RadCommonDynamicUpdater.setup();
       AreYouSure.setup();
       RadCommon.bootstrapSetup();
       DateSetup.setup();
