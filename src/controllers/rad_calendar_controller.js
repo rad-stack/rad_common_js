@@ -21,6 +21,7 @@ export default class extends Controller {
   config() {
     return {
       events: `${this.eventUrlValue}${window.location.search}`,
+      eventTextColor: 'black',
       eventRender(event, element) {
         if (event.background_color) {
           element.css('background-color', event.background_color);
