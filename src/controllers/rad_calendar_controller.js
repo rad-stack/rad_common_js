@@ -46,13 +46,8 @@ export default class extends Controller {
         }
       },
       startParam: 'start_time',
-      endParam: 'end_time',
-      ...this.configOverrides()
+      endParam: 'end_time'
     };
-  }
-
-  configOverrides() {
-    return {};
   }
 
   updateLoadingStatus(isLoading) {
