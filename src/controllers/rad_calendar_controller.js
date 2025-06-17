@@ -21,6 +21,18 @@ export default class extends Controller {
   config() {
     return {
       events: `${this.eventUrlValue}${window.location.search}`,
+      eventRender(event, element) {
+        if (event.background_color) {
+          element.css('background-color', event.background_color);
+          element.css('font-size', '1.2em');
+        }
+        if (event.icon) {
+          element.find('.fc-title').prepend(`<i class='${event.icon} mr-2 ml-2'></i>`);
+        }
+        if (event.description) {
+          $(element).tooltip({ title: event.description, container: 'body' });
+        }
+      },
       header: {
         left: 'prev,next today',
         center: 'title',
