@@ -18,7 +18,7 @@ export default class extends Controller {
 
   setupCalendar() {
     if (this.hasCalendarTarget) {
-      this.calendar = new Calendar($(this.calendarTarget), this.config());
+      this.calendar = new Calendar(this.calendarTarget, this.config());
       this.calendar.render();
     } else {
       this.showLoaded();
@@ -31,14 +31,16 @@ export default class extends Controller {
       plugins: [dayGridPlugin, bootstrapPlugin, timeGridPlugin, listPlugin, interactionPlugin],
       eventContent: function(info) {
         if (info.event.extendedProps.background_color) {
-          info.el.css('background-color', info.event.extendedProps.background_color);
-          info.el.css('font-size', '1.2em');
+          info.el.style.backgroundColor = info.event.extendedProps.background_color;
+          info.el.style.fontSize = '1.2em';
         }
         if (info.event.extendedProps.icon) {
-          info.el.find('.fc-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
+          // jquery
+          // info.el.find('.fc-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
         }
         if (info.event.extendedProps.description) {
-          $(info.el).tooltip({ title: info.event.extendedProps.description, container: 'body' });
+          // jquery
+          // info.el.tooltip({ title: info.event.extendedProps.description, container: 'body' });
         }
       },
       headerToolbar: {
@@ -48,7 +50,7 @@ export default class extends Controller {
       },
       loading: (isLoading) => this.updateLoadingStatus(isLoading),
       views: {
-        month: {
+        dayGridMonth: {
           displayEventEnd: true
         }
       },
