@@ -32,9 +32,15 @@ export class RadCommon {
       ActionTextFileValidations.setup();
     });
 
-    document.addEventListener('turbo:frame-load', (event) => {
-      RadTomSelect.setup(event.target.id);
-    });
+    document.addEventListener('turbo:before-stream-render', (event) => {
+      const originalRender = event.detail.render;
+      const target_id = event.target.target;
+      event.detail.render = async (currentElement) => {
+        await originalRender(currentElement);
+        console.log('Turbo stream event target:', target_id);
+        RadTomSelect.setup(target_id);
+      };});
+
   }
 
   static bootstrapSetup() {
