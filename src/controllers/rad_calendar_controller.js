@@ -31,8 +31,9 @@ export default class extends Controller {
       plugins: [dayGridPlugin, bootstrapPlugin, timeGridPlugin, listPlugin, interactionPlugin],
       eventContent: function(info) {
         if (info.event.extendedProps.background_color) {
-          info.el.style.backgroundColor = info.event.extendedProps.background_color;
-          info.el.style.fontSize = '1.2em';
+          // !!! info.el was available in eventRender, not in eventContent !!!
+          // info.el.style.backgroundColor = info.event.extendedProps.background_color;
+          // info.el.style.fontSize = '1.2em';
         }
         if (info.event.extendedProps.icon) {
           // jquery
