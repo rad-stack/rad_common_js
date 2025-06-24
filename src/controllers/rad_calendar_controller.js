@@ -1,5 +1,12 @@
 import { Controller } from '@hotwired/stimulus';
-import { Calendar } from 'fullcalendar/dist/fullcalendar.min';
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import bootstrapPlugin from '@fullcalendar/bootstrap';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+
+
 
 export default class extends Controller {
   static targets = ['calendar', 'loaded', 'loading'];
