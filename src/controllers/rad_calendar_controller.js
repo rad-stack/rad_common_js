@@ -29,16 +29,16 @@ export default class extends Controller {
     return {
       events: `${this.eventUrlValue}${window.location.search}`,
       plugins: [dayGridPlugin, bootstrapPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-      eventRender: function(info) {
+      eventContent: function(info) {
         if (info.event.extendedProps.background_color) {
           info.el.css('background-color', info.event.extendedProps.background_color);
           info.el.css('font-size', '1.2em');
         }
         if (info.event.extendedProps.icon) {
-          element.find('.fc-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
+          info.el.find('.fc-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
         }
         if (info.event.extendedProps.description) {
-          $(element).tooltip({ title: info.event.extendedProps.description, container: 'body' });
+          $(info.el).tooltip({ title: info.event.extendedProps.description, container: 'body' });
         }
       },
       headerToolbar: {
