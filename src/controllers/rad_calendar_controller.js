@@ -28,22 +28,23 @@ export default class extends Controller {
   config() {
     return {
       events: `${this.eventUrlValue}${window.location.search}`,
-      eventRender(event, element) {
-        if (event.background_color) {
-          element.css('background-color', event.background_color);
-          element.css('font-size', '1.2em');
+      plugins: [dayGridPlugin, bootstrapPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+      eventRender: function(info) {
+        if (info.event.extendedProps.background_color) {
+          info.el.css('background-color', info.event.extendedProps.background_color);
+          info.el.css('font-size', '1.2em');
         }
-        if (event.icon) {
-          element.find('.fc-title').prepend(`<i class='${event.icon} mr-2 ml-2'></i>`);
+        if (info.event.extendedProps.icon) {
+          element.find('.fc-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
         }
-        if (event.description) {
-          $(element).tooltip({ title: event.description, container: 'body' });
+        if (info.event.extendedProps.description) {
+          $(element).tooltip({ title: info.event.extendedProps.description, container: 'body' });
         }
       },
-      header: {
+      headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       loading: (isLoading) => this.updateLoadingStatus(isLoading),
       views: {
