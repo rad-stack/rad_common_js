@@ -13,7 +13,7 @@ import { BatchActions } from './batchActions';
 import { Duplicates } from './duplicates';
 import { RadTomSelect } from './radTomSelect';
 import { SentryTest } from './sentry';
-import { ActionTextFileValidations } from "./actionTextFileValidations";
+import { ActionTextFileValidations } from './actionTextFileValidations';
 
 import './radTurbo';
 
@@ -30,6 +30,10 @@ export class RadCommon {
       SentryTest.setup();
       RadTomSelect.setup();
       ActionTextFileValidations.setup();
+    });
+
+    document.addEventListener('turbo:frame-load', (event) => {
+      RadTomSelect.setup(event.target.id);
     });
   }
 

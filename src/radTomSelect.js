@@ -1,8 +1,9 @@
 import TomSelect from 'tom-select';
 
 export class RadTomSelect {
-  static setup() {
-    document.querySelectorAll('select.selectpicker,input.selectpicker').forEach((el) => {
+  static setup(id) {
+    const selector = id ? `#${id} select.selectpicker, #${id} input.selectpicker` : 'select.selectpicker, input.selectpicker';
+    document.querySelectorAll(selector).forEach((el) => {
       if (el.tomselect) {
         return;
       }
