@@ -29,21 +29,6 @@ export default class extends Controller {
     return {
       events: `${this.eventUrlValue}${window.location.search}`,
       plugins: [dayGridPlugin, bootstrapPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-      eventContent: function(info) {
-        if (info.event.extendedProps.background_color) {
-          // !!! info.el was available in eventRender, not in eventContent !!!
-          // info.el.style.backgroundColor = info.event.extendedProps.background_color;
-          // info.el.style.fontSize = '1.2em';
-        }
-        if (info.event.extendedProps.icon) {
-          // jquery
-          // info.el.find('.fc-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
-        }
-        if (info.event.extendedProps.description) {
-          // jquery
-          // info.el.tooltip({ title: info.event.extendedProps.description, container: 'body' });
-        }
-      },
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
