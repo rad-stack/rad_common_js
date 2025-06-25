@@ -29,7 +29,7 @@ export default class extends Controller {
     return {
       events: (fetchInfo, successCallback, failureCallback) => {
         let url = `${this.eventUrlValue}${window.location.search}`;
-        url += `&start_time=${fetchInfo.startStr}&end_time=${fetchInfo.endStr}`;
+        url += `?start_time=${fetchInfo.startStr}&end_time=${fetchInfo.endStr}`;
         fetch(url).then(response => response.json())
           .then(events => successCallback(events))
           .catch(error => failureCallback(error));
