@@ -46,7 +46,7 @@ export default class extends Controller {
           displayEventEnd: true
         }
       },
-      height: '80vh',
+      height: 'auto',
       startParam: 'start_time',
       endParam: 'end_time'
     };
