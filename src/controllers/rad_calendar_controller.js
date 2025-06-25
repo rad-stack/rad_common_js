@@ -18,8 +18,7 @@ export default class extends Controller {
 
   setupCalendar() {
     if (this.hasCalendarTarget) {
-      calendarEl = document.getElementById(this.calendarTarget)
-      this.calendar = new Calendar(calendarEl, this.config());
+      this.calendar = new Calendar(this.calendarTarget, this.config());
       this.calendar.render();
     } else {
       this.showLoaded();
@@ -28,7 +27,13 @@ export default class extends Controller {
 
   config() {
     return {
-      events: `${this.eventUrlValue}${window.location.search}`,
+      events: function(fetchInfo, successCallback, failureCallback) {
+        let url = `${this.eventUrlValue}${window.location.search}`.replace('?', '');
+        url += `&start_time=${fetchInfo.startStr}&end_time=${fetchInfo.endStr}`;
+        fetch(url).then(response => response.json())
+          .then(events => successCallback(events))
+          .catch(error => failureCallback(error));
+      },
       plugins: [dayGridPlugin, bootstrapPlugin, timeGridPlugin, listPlugin, interactionPlugin],
       headerToolbar: {
         left: 'prev,next today',
