@@ -18,7 +18,8 @@ export default class extends Controller {
 
   setupCalendar() {
     if (this.hasCalendarTarget) {
-      this.calendar = new Calendar(this.calendarTarget, this.config());
+      calendarEl = document.getElementById(this.calendarTarget)
+      this.calendar = new Calendar(calendarEl, this.config());
       this.calendar.render();
     } else {
       this.showLoaded();
