@@ -35,6 +35,7 @@ export default class extends Controller {
           .catch(error => failureCallback(error));
       },
       plugins: [dayGridPlugin, bootstrapPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+      themeSystem: 'bootstrap',
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -46,7 +47,7 @@ export default class extends Controller {
           displayEventEnd: true
         }
       },
-      height: '100%',
+      height: '80vh',
       startParam: 'start_time',
       endParam: 'end_time'
     };
