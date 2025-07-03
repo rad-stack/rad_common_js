@@ -13,7 +13,7 @@ import { BatchActions } from './batchActions';
 import { Duplicates } from './duplicates';
 import { RadTomSelect } from './radTomSelect';
 import { SentryTest } from './sentry';
-import { ActionTextFileValidations } from "./actionTextFileValidations";
+import { ActionTextFileValidations } from './actionTextFileValidations';
 
 import './radTurbo';
 
@@ -31,6 +31,16 @@ export class RadCommon {
       RadTomSelect.setup();
       ActionTextFileValidations.setup();
     });
+
+    document.addEventListener('turbo:before-stream-render', (event) => {
+      const originalRender = event.detail.render;
+      const target_id = event.target.target;
+      event.detail.render = async (currentElement) => {
+        await originalRender(currentElement);
+        console.log('Turbo stream event target:', target_id);
+        RadTomSelect.setup(target_id);
+      };});
+
   }
 
   static bootstrapSetup() {
