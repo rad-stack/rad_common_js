@@ -27,8 +27,8 @@ export default class extends Controller {
     return {
       timeZone: 'none',
       events: (fetchInfo, successCallback, failureCallback) => {
-        let url = `${this.eventUrlValue}.json`;
-        url += `?start_time=${fetchInfo.startStr}&end_time=${fetchInfo.endStr}`;
+        let url = `${this.eventUrlValue}.json?${window.location.search.replace('?', '')}`;
+        url += `&start_time=${fetchInfo.startStr}&end_time=${fetchInfo.endStr}`;
         fetch(url).then(response => response.json())
           .then(events => successCallback(events))
           .catch(error => failureCallback(error));
