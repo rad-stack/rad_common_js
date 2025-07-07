@@ -27,6 +27,7 @@ export default class extends Controller {
 
   config() {
     return {
+      timeZone: 'none',
       events: (fetchInfo, successCallback, failureCallback) => {
         let url = `${this.eventUrlValue}.json`;
         url += `?start_time=${fetchInfo.startStr}&end_time=${fetchInfo.endStr}`;
@@ -40,6 +41,14 @@ export default class extends Controller {
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      eventDidMount: function(info) {
+        if(info.event.extendedProps.icon){
+          $(info.el).find('.fc-event-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
+        }
+        if (info.event.extendedProps.description) {
+          $(info.el).tooltip({ title: info.event.extendedProps.description, container: 'body' });
+        }
       },
       loading: (isLoading) => this.updateLoadingStatus(isLoading),
       views: {
