@@ -41,6 +41,12 @@ export default class extends Controller {
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       eventDidMount: function(info) {
+        if(info.event.textColor) {
+          info.el.style.color = info.event.textColor;
+        }
+        if(info.event.backgroundColor) {
+          info.el.style.backgroundColor = info.event.backgroundColor;
+        }
         if(info.event.extendedProps.icon){
           $(info.el).find('.fc-event-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
         }
