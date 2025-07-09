@@ -1,5 +1,10 @@
 import { Controller } from '@hotwired/stimulus';
-import { Calendar } from 'fullcalendar/dist/fullcalendar.min';
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import bootstrapPlugin from '@fullcalendar/bootstrap';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
 
 export default class extends Controller {
   static targets = ['calendar', 'loaded', 'loading'];
@@ -11,7 +16,7 @@ export default class extends Controller {
 
   setupCalendar() {
     if (this.hasCalendarTarget) {
-      this.calendar = new Calendar($(this.calendarTarget), this.config());
+      this.calendar = new Calendar(this.calendarTarget, this.config());
       this.calendar.render();
     } else {
       this.showLoaded();
@@ -20,30 +25,42 @@ export default class extends Controller {
 
   config() {
     return {
-      events: `${this.eventUrlValue}${window.location.search}`,
-      eventRender(event, element) {
-        if (event.background_color) {
-          element.css('background-color', event.background_color);
-          element.css('font-size', '1.2em');
-        }
-        if (event.icon) {
-          element.find('.fc-title').prepend(`<i class='${event.icon} mr-2 ml-2'></i>`);
-        }
-        if (event.description) {
-          $(element).tooltip({ title: event.description, container: 'body' });
-        }
+      timeZone: 'none',
+      events: (fetchInfo, successCallback, failureCallback) => {
+        let url = `${this.eventUrlValue}.json?${window.location.search.replace('?', '')}`;
+        url += `&start_time=${fetchInfo.startStr}&end_time=${fetchInfo.endStr}`;
+        fetch(url).then(response => response.json())
+          .then(events => successCallback(events))
+          .catch(error => failureCallback(error));
       },
-      header: {
+      plugins: [dayGridPlugin, bootstrapPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+      themeSystem: 'bootstrap',
+      headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      eventDidMount: function(info) {
+        if(info.event.textColor) {
+          info.el.style.color = info.event.textColor;
+        }
+        if(info.event.backgroundColor) {
+          info.el.style.backgroundColor = info.event.backgroundColor;
+        }
+        if(info.event.extendedProps.icon){
+          $(info.el).find('.fc-event-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
+        }
+        if (info.event.extendedProps.description) {
+          $(info.el).tooltip({ title: info.event.extendedProps.description, container: 'body' });
+        }
       },
       loading: (isLoading) => this.updateLoadingStatus(isLoading),
       views: {
-        month: {
+        dayGridMonth: {
           displayEventEnd: true
         }
       },
+      height: '80vh',
       startParam: 'start_time',
       endParam: 'end_time'
     };
