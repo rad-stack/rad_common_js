@@ -8,7 +8,10 @@ import interactionPlugin from '@fullcalendar/interaction';
 
 export default class extends Controller {
   static targets = ['calendar', 'loaded', 'loading', 'datepicker'];
-  static values = { eventUrl: String };
+  static values = { 
+    eventUrl: String,
+    initialView: String
+  };
 
   connect() {
     this.debounceTimer = null;
@@ -49,7 +52,7 @@ export default class extends Controller {
   getUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     return {
-      view: urlParams.get('view') || 'dayGridMonth',
+      view: urlParams.get('view') || this.initialViewValue || 'dayGridMonth',
       date: urlParams.get('date') || new Date().toISOString().split('T')[0]
     };
   }
