@@ -98,6 +98,9 @@ export default class extends Controller {
         if(info.event.backgroundColor) {
           info.el.style.backgroundColor = info.event.backgroundColor;
         }
+        if (info.event.extendedProps.opacity) {
+          info.el.style.opacity = info.event.extendedProps.opacity;
+        }
         if(info.event.extendedProps.icon){
           $(info.el).find('.fc-event-title').prepend(`<i class='${info.event.extendedProps.icon} mr-2 ml-2'></i>`);
         }
