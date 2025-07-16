@@ -10,7 +10,7 @@ export default class extends Controller {
   static targets = ['calendar', 'loaded', 'loading', 'datepicker'];
   static values = { 
     eventUrl: String,
-    initialView: String
+    initialView: { type: String, default: 'dayGridMonth' }
   };
 
   connect() {
@@ -52,7 +52,7 @@ export default class extends Controller {
   getUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     return {
-      view: urlParams.get('view') || this.initialViewValue || 'dayGridMonth',
+      view: urlParams.get('view') || this.initialViewValue,
       date: urlParams.get('date') || new Date().toISOString().split('T')[0]
     };
   }
