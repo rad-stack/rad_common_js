@@ -32,6 +32,14 @@ export class RadTomSelect {
         onDropdownClose: function () {
           this.control_input.placeholder = initialPlaceholder;
         },
+        onChange: function() {
+          if (el.dataset.autosubmit === 'true') {
+            const form = el.closest('form');
+            if (form) {
+              form.submit();
+            }
+          }
+        },
         render: {
           option: function (item, escape) {
             const isInactive = el.querySelector(`option[value="${item.value}"]`)?.getAttribute('data-inactive') === 'true';
