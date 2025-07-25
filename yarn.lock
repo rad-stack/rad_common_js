@@ -60,10 +60,10 @@
   dependencies:
     levn "^0.4.1"
 
-"@fullcalendar/bootstrap@^6.1.11":
-  version "6.1.17"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/bootstrap/-/bootstrap-6.1.17.tgz#dc7fc0ce15387ce36d4fc20ef2ffb409e7408fb4"
-  integrity sha512-8oGlepD17TEx+D7HqCKCoH1P19yDDbMaLBjuV3fW3XsYCqVZ3uGHcXSVHr7Jw/GzWB05vKiU/+CVXFmApltrsQ==
+"@fullcalendar/bootstrap5@^6.1.11":
+  version "6.1.18"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/bootstrap5/-/bootstrap5-6.1.18.tgz#79cbc3cfe7584d4671dabdd40302cd2e3466aecd"
+  integrity sha512-IL+vBpYdho18G2rU+1zLA66Tlm2gkO2aBiESCxNJ+PqWPyZdNN2KRnClBLO+fw0zdR9NOJWvNfStKP2KPnlPQw==
 
 "@fullcalendar/core@~6.1.17":
   version "6.1.17"

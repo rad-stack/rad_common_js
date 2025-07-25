@@ -14,7 +14,7 @@
     "@sentry/browser": "^8.38.0",
     "bootstrap": "^5.3.7",
     "fullcalendar": "^6.1.11",
-    "@fullcalendar/bootstrap": "^6.1.11",
+    "@fullcalendar/bootstrap5": "^6.1.11",
     "jquery": "^3.3.1",
     "jquery-ujs": "^1.2.3",
     "moment": "^2.29.4",
