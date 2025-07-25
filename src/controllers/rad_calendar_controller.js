@@ -89,6 +89,10 @@ export default class extends Controller {
       },
       plugins: [dayGridPlugin, bootstrap5Plugin, timeGridPlugin, listPlugin, interactionPlugin],
       themeSystem: 'bootstrap5',
+      buttonIcons: {
+        prev: 'arrow-left-square-fill',
+        next: 'arrow-right-square-fill'
+      },
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
