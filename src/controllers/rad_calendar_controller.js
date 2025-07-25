@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import bootstrapPlugin from '@fullcalendar/bootstrap';
+import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -87,8 +87,8 @@ export default class extends Controller {
           .then(events => successCallback(events))
           .catch(error => failureCallback(error));
       },
-      plugins: [dayGridPlugin, bootstrapPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-      themeSystem: 'bootstrap',
+      plugins: [dayGridPlugin, bootstrap5Plugin, timeGridPlugin, listPlugin, interactionPlugin],
+      themeSystem: 'bootstrap5',
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
