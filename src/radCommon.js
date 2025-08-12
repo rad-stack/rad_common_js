@@ -17,6 +17,7 @@ import { SentryTest } from './sentry';
 import { ActionTextFileValidations } from './actionTextFileValidations';
 
 import './radTurbo';
+import 'chartkick/chart.js';
 
 export class RadCommon {
   static setup() {
