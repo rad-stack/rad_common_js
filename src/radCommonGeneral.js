@@ -37,12 +37,15 @@ export class RadCommonGeneral {
   }
 
   static arrayFields() {
-    $('.array-add-btn').click(function() {
-      let clone;
-      clone = $(this).closest('.form-group').find('input').last().clone();
-      clone.val('');
-      $(clone).insertBefore($(this));
-    });
+    if (document.querySelectorAll('.array-add-btn').length) {
+      document.querySelectorAll('.array-add-btn').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+          var clone = e.target.parentElement.querySelector('.array-field').cloneNode(true);
+          clone.value = '';
+          e.target.insertAdjacentElement('beforebegin', clone);
+        });
+      });
+    }
   }
 
   static readmore() {
