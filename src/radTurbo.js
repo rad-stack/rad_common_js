@@ -10,3 +10,15 @@ document.addEventListener('turbo:before-fetch-response', (event) => {
     Toast.error('Unauthorized', 'You are not authorized to perform this action.');
   }
 });
+
+Turbo.StreamActions.update_input = function () {
+  this.targetElements.forEach((target) => {
+    target.value = this.templateContent.textContent;
+  });
+};
+
+Turbo.StreamActions.scroll_bottom = function () {
+  this.targetElements.forEach((target) => {
+    target.scrollTop = target.scrollHeight;
+  });
+};
