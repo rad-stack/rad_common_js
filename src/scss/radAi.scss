@@ -88,3 +88,9 @@
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+
+.chat-text {
+  pre {
+    white-space: pre-wrap;
+  }
+}
