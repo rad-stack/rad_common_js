@@ -37,8 +37,13 @@ class RichText {
   insertHeadingDialog() {
     this.dialogsElement.insertAdjacentHTML('beforeend', this.dialogHeadingTemplate);
   }
+  
+  insertUnderlineButton() {
+    this.buttonGroupTextTools.insertAdjacentHTML('beforeend','<button type="button" class="trix-button trix-button--icon trix-button--icon-underline" data-trix-attribute="underline"><sub>Underline</sub></button>');
+  }
 
   insertColorElements() {
+    this.insertUnderlineButton();
     this.insertColorButton();
     this.insertDialogColor();
   }
