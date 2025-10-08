@@ -3,6 +3,7 @@ import Trix from 'trix';
 addHeadingAttributes();
 addForegroundColorAttributes();
 addBackgroundColorAttributes();
+addUnderlineAttribute();
 
 addEventListener('trix-initialize', function (event) {
   new RichText(event.target);
@@ -14,6 +15,7 @@ class RichText {
 
     this.insertHeadingElements();
     this.insertColorElements();
+    this.insertUnderlineButton();
   }
 
   insertHeadingElements() {
@@ -49,6 +51,10 @@ class RichText {
 
   insertDialogColor() {
     this.dialogsElement.insertAdjacentHTML('beforeend', this.dialogColorTemplate);
+  }
+
+  insertUnderlineButton() {
+    this.buttonGroupTextTools.insertAdjacentHTML('beforeend', this.underlineButtonTemplate);
   }
 
   get buttonGroupBlockTools() {
@@ -89,6 +95,10 @@ class RichText {
 
   get colorButtonTemplate() {
     return '<button type="button" class="trix-button trix-button--icon trix-button--icon-color" data-trix-action="x-color" title="Color" tabindex="-1">Color</button>';
+  }
+
+  get underlineButtonTemplate() {
+    return '<button type="button" class="trix-button trix-button--icon trix-button--icon-underline" data-trix-attribute="underline" title="Underline" tabindex="-1">Underline</button>';
   }
 
   get dialogHeadingTemplate() {
@@ -158,4 +168,8 @@ function addBackgroundColorAttributes() {
   Array.from(['rgb(250, 247, 133)', 'rgb(255, 240, 219)', 'rgb(255, 229, 229)', 'rgb(255, 228, 247)', 'rgb(242, 237, 255)', 'rgb(225, 239, 252)', 'rgb(228, 248, 226)', 'rgb(238, 226, 215)', 'rgb(242, 242, 242)']).forEach((color, i) => {
     Trix.config.textAttributes[`bgColor${(i + 1)}`] = { style: { backgroundColor: color }, inheritable: true, parser: e => e.style.backgroundColor == color };
   });
+}
+
+function addUnderlineAttribute() {
+  Trix.config.textAttributes.underline = { tagName: 'u', inheritable: true };
 }
