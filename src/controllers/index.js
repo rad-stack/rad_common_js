@@ -8,6 +8,7 @@ import ToastController from './toast_controller';
 import TimezoneDetectionController from './timezone_detection_controller';
 import ChatPollingController from './chat_polling_controller';
 import LlmChatFormController from './llm_chat_form_controller';
+import InvitationFormController from './invitation_forms_controller';
 
 export const radControllers = [
   { id: 'global-search', controller: GlobalSearchController },
@@ -19,5 +20,6 @@ export const radControllers = [
   { id: 'toast', controller: ToastController },
   { id: 'timezone-detection', controller: TimezoneDetectionController },
   { id: 'chat-polling', controller: ChatPollingController },
-  { id: 'llm-chat-form', controller: LlmChatFormController }
+  { id: 'llm-chat-form', controller: LlmChatFormController },
+  { id: 'invitation-form', controller: InvitationFormController }
 ];
