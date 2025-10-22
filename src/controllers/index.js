@@ -10,6 +10,11 @@ import ChatPollingController from './chat_polling_controller';
 import LlmChatFormController from './llm_chat_form_controller';
 import InvitationFormController from './invitation_forms_controller';
 import FilterToggleController from './filter_toggle_controller';
+import FormulaEditorController from './formula_editor_controller';
+import ReportBuilderController from './report_builder_controller';
+import SortableController from './sortable_controller';
+import CalculatedColumnFormController from './calculated_column_form_controller';
+import CustomReportFilterFormController from './custom_report_filter_form_controller';
 
 export const radControllers = [
   { id: 'global-search', controller: GlobalSearchController },
@@ -23,5 +28,10 @@ export const radControllers = [
   { id: 'chat-polling', controller: ChatPollingController },
   { id: 'llm-chat-form', controller: LlmChatFormController },
   { id: 'invitation-form', controller: InvitationFormController },
-  { id: 'filter-toggle', controller: FilterToggleController }
+  { id: 'filter-toggle', controller: FilterToggleController },
+  { id: 'formula-editor', controller: FormulaEditorController },
+  { id: 'report-builder', controller: ReportBuilderController },
+  { id: 'sortable', controller: SortableController },
+  { id: 'calculated-column-form', controller: CalculatedColumnFormController },
+  { id: 'custom-report-filter-form', controller: CustomReportFilterFormController }
 ];
