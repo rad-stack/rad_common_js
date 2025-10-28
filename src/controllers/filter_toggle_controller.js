@@ -2,8 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
   static targets = ['collapse'];
-
-  static STORAGE_KEY = 'filters-collapsed';
+  static values = { defaultCollapsed: Boolean };
 
   connect() {
     this.restoreState();
@@ -37,22 +36,27 @@ export default class extends Controller {
 
   handleShown() {
     try {
-      localStorage.setItem(this.constructor.STORAGE_KEY, 'false');
+      localStorage.setItem(this.storageKey(), 'false');
     } catch { /**/ }
   }
 
   handleHidden() {
     try {
-      localStorage.setItem(this.constructor.STORAGE_KEY, 'true');
+      localStorage.setItem(this.storageKey(), 'true');
     } catch { /**/ }
   }
 
   restoreState() {
     try {
-      const isCollapsed = localStorage.getItem(this.constructor.STORAGE_KEY) === 'true';
+      const isCollapsed = localStorage.getItem(this.storageKey()) === 'true' ||
+        (this.defaultCollapsedValue && [null, undefined].includes(localStorage.getItem(this.storageKey())));
       if (isCollapsed && this.collapseTarget?.classList.contains('show')) {
         this.collapseTarget.classList.remove('show');
       }
     } catch { /**/ }
+  }
+
+  storageKey() {
+    return `filter-toggle-collapsed${window.location.pathname.replaceAll('/', '-')}`;
   }
 }
