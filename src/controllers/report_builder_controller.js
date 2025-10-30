@@ -111,7 +111,7 @@ export default class extends Controller {
 
       this.createHiddenInput(
         `custom_report[columns][${index}][sortable]`,
-        isSortable && !isCalculated ? '1' : '0'  // Calculated columns can't be sorted at DB level
+        isSortable ? '1' : '0'
       );
     });
   }
