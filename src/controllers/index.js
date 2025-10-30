@@ -9,6 +9,7 @@ import TimezoneDetectionController from './timezone_detection_controller';
 import ChatPollingController from './chat_polling_controller';
 import LlmChatFormController from './llm_chat_form_controller';
 import InvitationFormController from './invitation_forms_controller';
+import FilterToggleController from './filter_toggle_controller';
 
 export const radControllers = [
   { id: 'global-search', controller: GlobalSearchController },
@@ -21,5 +22,6 @@ export const radControllers = [
   { id: 'timezone-detection', controller: TimezoneDetectionController },
   { id: 'chat-polling', controller: ChatPollingController },
   { id: 'llm-chat-form', controller: LlmChatFormController },
-  { id: 'invitation-form', controller: InvitationFormController }
+  { id: 'invitation-form', controller: InvitationFormController },
+  { id: 'filter-toggle', controller: FilterToggleController }
 ];
