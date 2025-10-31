@@ -17,6 +17,7 @@ import ReportBuilderController from './report_builder_controller';
 import SortableController from './sortable_controller';
 import CalculatedColumnFormController from './calculated_column_form_controller';
 import CustomReportFilterFormController from './custom_report_filter_form_controller';
+import ConfigEditorController from './config_editor_controller';
 
 export const radControllers = [
   { id: 'global-search', controller: GlobalSearchController },
@@ -37,5 +38,6 @@ export const radControllers = [
   { id: 'report-builder', controller: ReportBuilderController },
   { id: 'sortable', controller: SortableController },
   { id: 'calculated-column-form', controller: CalculatedColumnFormController },
-  { id: 'custom-report-filter-form', controller: CustomReportFilterFormController }
+  { id: 'custom-report-filter-form', controller: CustomReportFilterFormController },
+  { id: 'config-editor', controller: ConfigEditorController }
 ];
