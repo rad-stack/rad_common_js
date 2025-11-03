@@ -2,15 +2,25 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
   static targets = ['collapse'];
-  static values = { defaultCollapsed: Boolean };
+  static values = { behavior: String };
 
   connect() {
-    this.restoreState();
-    this.setupEventListeners();
+    this.applyBehavior();
   }
 
   disconnect() {
     this.removeEventListeners();
+  }
+
+  applyBehavior() {
+    try {
+      if (!this.hasCollapseTarget || !this.hasBehaviorValue) return;
+
+      if (this.behaviorValue === 'remember_state') {
+        this.restoreState();
+        this.setupEventListeners();
+      }
+    } catch { /**/ }
   }
 
   setupEventListeners() {
@@ -27,7 +37,7 @@ export default class extends Controller {
 
   removeEventListeners() {
     try {
-      if (this.hasCollapseTarget) {
+      if (this.hasCollapseTarget && this.handleShown && this.handleHidden) {
         this.collapseTarget.removeEventListener('shown.bs.collapse', this.handleShown);
         this.collapseTarget.removeEventListener('hidden.bs.collapse', this.handleHidden);
       }
@@ -48,8 +58,7 @@ export default class extends Controller {
 
   restoreState() {
     try {
-      const isCollapsed = localStorage.getItem(this.storageKey()) === 'true' ||
-        (this.defaultCollapsedValue && [null, undefined].includes(localStorage.getItem(this.storageKey())));
+      const isCollapsed = localStorage.getItem(this.storageKey()) === 'true';
       if (isCollapsed && this.collapseTarget?.classList.contains('show')) {
         this.collapseTarget.classList.remove('show');
       }
