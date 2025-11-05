@@ -1,7 +1,8 @@
 import { Turbo } from '@hotwired/turbo-rails';
+import * as bootstrap from 'bootstrap';
 Turbo.session.drive = false;
 
-import { Toast } from 'rad_common_js/src/toast.js';
+import { Toast } from './toast.js';
 
 document.addEventListener('turbo:frame-load', () => $('[data-toggle="tooltip"]').tooltip({ boundary: 'window' }));  
 document.addEventListener('turbo:before-fetch-response', (event) => {
@@ -20,5 +21,22 @@ Turbo.StreamActions.update_input = function () {
 Turbo.StreamActions.scroll_bottom = function () {
   this.targetElements.forEach((target) => {
     target.scrollTop = target.scrollHeight;
+  });
+};
+
+Turbo.StreamActions.send_success_toast = function () {
+  const message = this.getAttribute('message') || this.templateContent.textContent.trim();
+  Toast.success('Success!', message);
+};
+
+Turbo.StreamActions.send_error_toast = function () {
+  const message = this.getAttribute('message') || this.templateContent.textContent.trim();
+  Toast.error('Error', message);
+};
+
+Turbo.StreamActions.hide_modal = function () {
+  this.targetElements.forEach((target) => {
+    const modal = bootstrap.Modal.getOrCreateInstance(target);
+    modal.hide();
   });
 };
