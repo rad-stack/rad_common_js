@@ -40,3 +40,20 @@ Turbo.StreamActions.hide_modal = function () {
     modal.hide();
   });
 };
+
+Turbo.StreamActions.toggle_collapse = function() {
+  const collapseId = this.getAttribute('target');
+  const state = this.getAttribute('state');
+  const collapseElement = document.getElementById(collapseId);
+
+  let bsCollapse = collapseElement && bootstrap.Collapse.getInstance(collapseElement);
+  if (!bsCollapse) {
+    bsCollapse = new bootstrap.Collapse(collapseElement, { toggle: false });
+  }
+
+  if (state === 'show') {
+    bsCollapse.show();
+  } else if (state === 'hide') {
+    bsCollapse.hide();
+  }
+};
