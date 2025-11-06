@@ -2,25 +2,21 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
   static targets = ['collapse'];
-  static values = { behavior: String };
+  static values = {
+    enabled: { type: Boolean, default: false },
+    storageKey: String
+  };
 
   connect() {
-    this.applyBehavior();
+    if (this.enabledValue && this.hasCollapseTarget) {
+      this.collapseTarget.style.transition = 'none';
+      this.restoreState();
+      this.setupEventListeners();
+    }
   }
 
   disconnect() {
     this.removeEventListeners();
-  }
-
-  applyBehavior() {
-    try {
-      if (!this.hasCollapseTarget || !this.hasBehaviorValue) return;
-
-      if (this.behaviorValue === 'remember_state') {
-        this.restoreState();
-        this.setupEventListeners();
-      }
-    } catch { /**/ }
   }
 
   setupEventListeners() {
@@ -46,26 +42,33 @@ export default class extends Controller {
 
   handleShown() {
     try {
-      localStorage.setItem(this.storageKey(), 'false');
+      localStorage.setItem(this.storageKey(), 'visible');
     } catch { /**/ }
   }
 
   handleHidden() {
     try {
-      localStorage.setItem(this.storageKey(), 'true');
+      localStorage.setItem(this.storageKey(), 'hidden');
     } catch { /**/ }
   }
 
   restoreState() {
     try {
-      const isCollapsed = localStorage.getItem(this.storageKey()) === 'true';
-      if (isCollapsed && this.collapseTarget?.classList.contains('show')) {
+      const savedState = localStorage.getItem(this.storageKey());
+      if (!savedState) return;
+
+      const shouldBeHidden = savedState === 'hidden';
+      const isCurrentlyVisible = this.collapseTarget?.classList.contains('show');
+
+      if (shouldBeHidden && isCurrentlyVisible) {
         this.collapseTarget.classList.remove('show');
+      } else if (!shouldBeHidden && !isCurrentlyVisible) {
+        this.collapseTarget.classList.add('show');
       }
     } catch { /**/ }
   }
 
   storageKey() {
-    return `filter-toggle-collapsed${window.location.pathname.replaceAll('/', '-')}`;
+    return this.storageKeyValue;
   }
 }
