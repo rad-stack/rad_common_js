@@ -6,11 +6,16 @@ export default class extends Controller {
 
   setRange(event) {
     event.preventDefault();
-    const range = event.currentTarget.dataset.range;
-    this.setDateRange(range);
+    const target = event.currentTarget;
+    const range = target.dataset.range;
+    
+    const startValue = target.dataset.start;
+    const endValue = target.dataset.end;
+    
+    this.setDateRange(range, startValue, endValue);
   }
 
-  setDateRange(range) {
+  setDateRange(range, startValue, endValue) {
     let startDate, endDate;
 
     switch (range) {
@@ -50,6 +55,14 @@ export default class extends Controller {
       startDate = null;
       endDate = null;
       break;
+    default:
+      if (startValue) {
+        startDate = moment(startValue);
+      }
+      
+      if (endValue) {
+        endDate = moment(endValue);
+      }
     }
 
     if (this.hasStartInputTarget && this.hasEndInputTarget) {
