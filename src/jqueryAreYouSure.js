@@ -22,7 +22,6 @@ import $ from 'jquery';
         return null;
       }
 
-      // Get the Trix editor instance and return its content
       var editor = $trixEditor[0].editor;
       if (editor) {
         return editor.getDocument().toString();
@@ -153,7 +152,6 @@ import $ from 'jquery';
       $(fields).bind(settings.fieldEvents, checkForm);
       $form.data('ays-orig-field-count', $(fields).length);
 
-      // Initialize Trix editors
       var $trixEditors = $form.find('trix-editor');
       $trixEditors.each(function() { storeOrigTrixValue($(this)); });
       $trixEditors.unbind('trix-change', checkForm);
@@ -187,7 +185,6 @@ import $ from 'jquery';
         }
       });
 
-      // Rescan Trix editors
       var $trixEditors = $form.find('trix-editor');
       $trixEditors.each(function() {
         var $trixEditor = $(this);
