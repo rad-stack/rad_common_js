@@ -10,6 +10,7 @@ import ChatPollingController from './chat_polling_controller';
 import LlmChatFormController from './llm_chat_form_controller';
 import InvitationFormController from './invitation_forms_controller';
 import CollapseStateController from './collapse_state_controller';
+import ClipboardController from './clipboard_controller';
 
 export const radControllers = [
   { id: 'global-search', controller: GlobalSearchController },
@@ -23,5 +24,6 @@ export const radControllers = [
   { id: 'chat-polling', controller: ChatPollingController },
   { id: 'llm-chat-form', controller: LlmChatFormController },
   { id: 'invitation-form', controller: InvitationFormController },
-  { id: 'collapse-state', controller: CollapseStateController }
+  { id: 'collapse-state', controller: CollapseStateController },
+  { id: 'clipboard', controller: ClipboardController }
 ];
