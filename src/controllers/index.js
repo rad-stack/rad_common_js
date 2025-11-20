@@ -11,7 +11,6 @@ import LlmChatFormController from './llm_chat_form_controller';
 import InvitationFormController from './invitation_forms_controller';
 import CollapseStateController from './collapse_state_controller';
 import ClipboardController from './clipboard_controller';
-import FilterToggleController from './filter_toggle_controller';
 import FormulaEditorController from './formula_editor_controller';
 import ReportBuilderController from './report_builder_controller';
 import SortableController from './sortable_controller';
@@ -33,7 +32,6 @@ export const radControllers = [
   { id: 'invitation-form', controller: InvitationFormController },
   { id: 'collapse-state', controller: CollapseStateController },
   { id: 'clipboard', controller: ClipboardController },
-  { id: 'filter-toggle', controller: FilterToggleController },
   { id: 'formula-editor', controller: FormulaEditorController },
   { id: 'report-builder', controller: ReportBuilderController },
   { id: 'sortable', controller: SortableController },
