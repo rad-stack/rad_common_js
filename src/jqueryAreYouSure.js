@@ -15,6 +15,20 @@ import $ from 'jquery';
         'fieldSelector': ':input:not(input[type=submit]):not(input[type=button])'
       }, options);
 
+    var getTrixValue = function($trixEditor) {
+      if ($trixEditor.hasClass('ays-ignore') ||
+        $trixEditor.hasClass('aysIgnore') ||
+        $trixEditor.attr('data-ays-ignore')) {
+        return null;
+      }
+
+      var editor = $trixEditor[0].editor;
+      if (editor) {
+        return editor.getDocument().toString();
+      }
+      return '';
+    };
+
     var getValue = function($field) {
       if ($field.hasClass('ays-ignore') ||
         $field.hasClass('aysIgnore') ||
@@ -58,6 +72,10 @@ import $ from 'jquery';
       $field.data('ays-orig', getValue($field));
     };
 
+    var storeOrigTrixValue = function($trixEditor) {
+      $trixEditor.data('ays-orig', getTrixValue($trixEditor));
+    };
+
     var checkForm = function(evt) {
 
       var isFieldDirty = function($field) {
@@ -68,12 +86,25 @@ import $ from 'jquery';
         return (getValue($field) != origValue);
       };
 
-      var $form = ($(this).is('form')) 
+      var isTrixEditorDirty = function($trixEditor) {
+        var origValue = $trixEditor.data('ays-orig');
+        if (undefined === origValue) {
+          return false;
+        }
+        return (getTrixValue($trixEditor) != origValue);
+      };
+
+      var $form = ($(this).is('form'))
         ? $(this)
         : $(this).parents('form');
 
       // Test on the target first as it's the most likely to be dirty
-      if (isFieldDirty($(evt.target))) {
+      if ($(evt.target).is('trix-editor')) {
+        if (isTrixEditorDirty($(evt.target))) {
+          setDirtyStatus($form, true);
+          return;
+        }
+      } else if (isFieldDirty($(evt.target))) {
         setDirtyStatus($form, true);
         return;
       }
@@ -99,6 +130,18 @@ import $ from 'jquery';
         }
       });
 
+      // Also check Trix editors
+      if (!isDirty) {
+        var $trixEditors = $form.find('trix-editor');
+        $trixEditors.each(function() {
+          var $trixEditor = $(this);
+          if (isTrixEditorDirty($trixEditor)) {
+            isDirty = true;
+            return false; // break
+          }
+        });
+      }
+
       setDirtyStatus($form, isDirty);
     };
 
@@ -108,6 +151,12 @@ import $ from 'jquery';
       $(fields).unbind(settings.fieldEvents, checkForm);
       $(fields).bind(settings.fieldEvents, checkForm);
       $form.data('ays-orig-field-count', $(fields).length);
+
+      var $trixEditors = $form.find('trix-editor');
+      $trixEditors.each(function() { storeOrigTrixValue($(this)); });
+      $trixEditors.unbind('trix-change', checkForm);
+      $trixEditors.bind('trix-change', checkForm);
+
       setDirtyStatus($form, false);
     };
 
@@ -135,6 +184,16 @@ import $ from 'jquery';
           $field.bind(settings.fieldEvents, checkForm);
         }
       });
+
+      var $trixEditors = $form.find('trix-editor');
+      $trixEditors.each(function() {
+        var $trixEditor = $(this);
+        if (!$trixEditor.data('ays-orig')) {
+          storeOrigTrixValue($trixEditor);
+          $trixEditor.bind('trix-change', checkForm);
+        }
+      });
+
       // Check for changes while we're here
       $form.trigger('checkform.areYouSure');
     };
