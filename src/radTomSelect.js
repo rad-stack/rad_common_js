@@ -130,5 +130,6 @@ export class RadTomSelect {
         }
       });
     });
+    window.dispatchEvent(new CustomEvent('RadTomSelectLoaded'));
   }
 }
